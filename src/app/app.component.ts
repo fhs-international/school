@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IpcRenderer } from 'electron';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,11 +9,12 @@ import { IpcRenderer } from 'electron';
 })
 export class AppComponent {
   title = 'school';
+  showFiller = false;
   private ipc: IpcRenderer;
-  constructor(){
-    if ((<any>window).require) {
+  constructor() {
+    if ((window as any).require) {
       try {
-        this.ipc = (<any>window).require('electron').ipcRenderer;
+        this.ipc = (window as any).require('electron').ipcRenderer;
       } catch (e) {
         throw e;
       }
@@ -21,8 +23,8 @@ export class AppComponent {
     }
   }
 
-  openModal(){
-    console.log("Open a modal");
-    this.ipc.send("openModal");
+  openModal() {
+    console.log('Open a modal');
+    this.ipc.send('openModal');
   }
 }
